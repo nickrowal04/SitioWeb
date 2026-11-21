@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio de Dilan Rojas: desarrollo web, bases de datos SQL, chats con IA y automatización de procesos en Granada, Meta, Colombia.">
+  <meta name="theme-color" content="#0d1117">
+  <title>Dilan Rojas | Desarrollador de Software, SQL, IA &amp; Automatización</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Menú desplegable del perfil
+      const profileDropdown = document.getElementById('profile-dropdown');
+      const profileToggle = document.getElementById('profile-toggle');
+      const menuToggle = document.getElementById('menu-toggle');
+
+      if (!profileDropdown || !profileToggle) return;
+
+      function setDropdownOpen(open) {
+        profileDropdown.classList.toggle('hidden', !open);
+        profileToggle.setAttribute('aria-expanded', String(open));
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', String(open));
+      }
+
+      function toggleDropdown() {
+        setDropdownOpen(profileDropdown.classList.contains('hidden'));
+      }
+
+      profileToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleDropdown();
+      });
+
+      if (menuToggle) {
+        menuToggle.addEventListener('click', (event) => {
+          event.stopPropagation();
+          toggleDropdown();
+        });
+      }
+
+      profileDropdown.querySelectorAll('[data-menu-link]').forEach((link) => {
+        link.addEventListener('click', () => setDropdownOpen(false));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!profileDropdown.contains(event.target) && event.target !== profileToggle) {
+          setDropdownOpen(false);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setDropdownOpen(false);
+      });
+    });
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          // Paleta GitHub Dark (Primer)
+          colors: {
+            canvas: { DEFAULT: '#0d1117', subtle: '#161b22', inset: '#010409' },
+            line:   { DEFAULT: '#30363d', muted: '#21262d' },
+            btn:    { DEFAULT: '#21262d', hover: '#30363d' },
+            fg:     { DEFAULT: '#e6edf3', soft: '#c9d1d9', muted: '#8b949e', subtle: '#7d8590' },
+            accent: { DEFAULT: '#58a6ff', light: '#79c0ff', emphasis: '#1f6feb', hover: '#388bfd' },
+            success:{ DEFAULT: '#3fb950', emphasis: '#238636', hover: '#2ea043' },
+            attention: '#d29922',
+            danger: '#f85149',
+            done: '#a371f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+
+    body {
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+
+    .glass {
+      background: #161b22;
+      border: 1px solid #30363d;
+    }
+
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #0d1117; }
+    ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 6px; border: 2px solid #0d1117; }
+    ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+    /* GitHub-style chrome */
+    .github-header {
+      height: 64px;
+      background: #010409;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .github-icon-btn {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #c9d1d9;
+      background: #0d1117;
+    }
+
+    .github-icon-btn:hover {
+      background: #161b22;
+      border-color: #8b949e;
+    }
+
+    .profile-dropdown {
+      position: fixed;
+      top: 54px;
+      right: max(16px, calc((100vw - 1280px) / 2 + 16px));
+      width: 430px;
+      max-height: calc(100vh - 74px);
+      overflow-y: auto;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      box-shadow: 0 16px 48px rgba(1, 4, 9, 0.75);
+      z-index: 70;
+    }
+
+    .profile-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 78px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #21262d;
+      transition: background 0.15s ease;
+    }
+
+    .profile-dropdown a:last-child {
+      border-bottom: 0;
+    }
+
+    .profile-dropdown a:hover {
+      background: #1c2128;
+    }
+
+    .profile-dropdown .menu-icon {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 48px;
+      border-radius: 10px;
+      border: 1px solid rgba(139, 148, 158, 0.18);
+      background: #0d1117;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+    }
+
+    @media (max-width: 767px) {
+      .profile-dropdown {
+        top: 58px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-accent-emphasis selection:text-white">
+
+  <!-- Barra superior estilo GitHub -->
+  <header class="github-header fixed top-0 inset-x-0 z-50">
+    <div class="max-w-[1280px] mx-auto px-4 h-16 flex items-center gap-4">
+      <button id="menu-toggle" type="button" class="github-icon-btn shrink-0 lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="profile-dropdown">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 7.75zm.75 4.25a.75.75 0 000 1.5h12.5a.75.75 0 000-1.5H1.75z"/></svg>
+      </button>
+
+      <a href="#inicio" aria-label="Inicio" class="text-fg shrink-0">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.61.11.83-.26.83-.58v-2.23c-3.19.69-3.87-1.35-3.87-1.35-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.96 10.96 0 0112 6.25c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.13v3.16c0 .32.21.7.84.58A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/>
+        </svg>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-4 text-[14px] font-semibold text-fg">
+        <a class="hover:text-fg-muted transition" href="#servicios">Product</a>
+        <a class="hover:text-fg-muted transition" href="#proyectos">Solutions</a>
+        <a class="hover:text-fg-muted transition" href="#sql-lab">Resources</a>
+        <a class="hover:text-fg-muted transition" href="#contacto">Open Source</a>
+      </nav>
+
+      <div class="ml-auto"></div>
+
+      <button id="profile-toggle" type="button" class="w-8 h-8 rounded-full bg-accent-emphasis flex items-center justify-center text-white text-xs font-bold shrink-0 border-0" aria-label="Abrir servicios de Dilan" aria-expanded="false" aria-controls="profile-dropdown">DR</button>
+    </div>
+  </header>
+
+  <nav id="profile-dropdown" class="profile-dropdown hidden" aria-label="Servicios profesionales">
+    <a href="#servicios" data-menu-link>
+      <span class="menu-icon text-accent">&lt;/&gt;</span>
+      <span>
+        <strong class="block text-fg text-base">Desarrollo web</strong>
+        <span class="block text-fg-muted text-sm mt-1">Páginas web, landing pages y plataformas personalizadas.</span>
+      </span>
+    </a>
+    <a href="#perfil" data-menu-link>
+      <span class="menu-icon text-success">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A1.75 1.75 0 013.75 1h8.5A1.75 1.75 0 0114 2.75v10.5A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25h-8.5zM5 4h6v1.5H5V4zm0 3h6v1.5H5V7zm0 3h3.5v1.5H5V10z"/></svg>
+      </span>
+      <span>
+        <strong class="block text-fg text-base">Bases de datos y análisis</strong>
+        <span class="block text-fg-muted text-sm mt-1">SQL, gestión de información, reportes e indicadores.</span>
+      </span>
+    </a>
+    <a href="#perfil" data-menu-link>
+      <span class="menu-icon text-attention">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M5.75 1.5A2.25 2.25 0 008 3.75v.75h.75a2.25 2.25 0 012.25 2.25v.75h1.25a2.25 2.25 0 010 4.5H11v.75a2.25 2.25 0 01-4.5 0V12H5.75a2.25 2.25 0 010-4.5H6V6.75A2.25 2.25 0 003.75 4.5H2.5a1 1 0 010-2h1.25V1.5h2z"/></svg>
+      </span>
+      <span>
+        <strong class="block text-fg text-base">Automatización de procesos</strong>
+        <span class="block text-fg-muted text-sm mt-1">Integraciones, flujos de trabajo y optimización de tareas.</span>
+      </span>
+    </a>
+    <a href="#servicios" data-menu-link>
+      <span class="menu-icon text-done">IA</span>
+      <span>
+        <strong class="block text-fg text-base">Inteligencia artificial</strong>
+        <span class="block text-fg-muted text-sm mt-1">Chatbots, asistentes virtuales e integración de IA.</span>
+      </span>
+    </a>
+    <a href="#proyectos" data-menu-link>
+      <span class="menu-icon text-danger">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5A2.5 2.5 0 016.5 0h3A2.5 2.5 0 0112 2.5V4h1.25A1.75 1.75 0 0115 5.75v7.5A1.75 1.75 0 0113.25 15H2.75A1.75 1.75 0 011 13.25v-7.5A1.75 1.75 0 012.75 4H4V2.5zm1.5 0V4h5V2.5a1 1 0 00-1-1h-3a1 1 0 00-1 1z"/></svg>
+      </span>
+      <span>
+        <strong class="block text-fg text-base">Soluciones para negocios</strong>
+        <span class="block text-fg-muted text-sm mt-1">Menús digitales, tiendas online y sistemas de gestión.</span>
+      </span>
+    </a>
+  </nav>
+
+  <main>
+    <!-- Hero principal con presentación y terminal interactiva -->
+    <section id="inicio" class="pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-emphasis/10 border border-accent-emphasis/40 text-accent text-xs font-mono">
+            <span>📍 Granada, Meta · Orgullosamente Llanero</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-fg leading-[1.1]">
+            Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-done to-[#f778ba]">Dilan Rojas.</span>
+          </h1>
+
+          <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-fg leading-tight">
+            Desarrollo soluciones digitales que impulsan negocios.
+          </h2>
+
+          <p class="text-fg-muted text-base sm:text-lg leading-relaxed max-w-2xl">
+            Soy desarrollador de software con enfoque en desarrollo web, bases de datos SQL y automatización de procesos. Diseño y construyo herramientas tecnológicas que conectan innovación, funcionalidad y eficiencia.
+          </p>
+
+          <p class="text-fg-muted text-base leading-relaxed max-w-2xl">
+            Creo desde páginas web, landing pages y plataformas personalizadas hasta chatbots con inteligencia artificial, sistemas de gestión, menús digitales y automatizaciones que simplifican el trabajo y optimizan procesos empresariales.
+          </p>
+
+          <p class="text-fg text-base leading-relaxed max-w-2xl">
+            <strong>Mi objetivo:</strong> transformar ideas y necesidades reales en soluciones digitales útiles, modernas y escalables.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="#proyectos" class="px-6 py-3 rounded-xl bg-success-emphasis hover:bg-success-hover text-white font-bold text-sm transition">
+              Ver Proyectos en Vivo
+            </a>
+            <a href="https://wa.me/573156218047?text=Hola%20Dilan,%20quiero%20cotizar%20un%20proyecto" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl glass hover:border-fg-subtle text-fg font-semibold text-sm transition flex items-center gap-2">
+              <span>WhatsApp: 315 621 8047</span>
+            </a>
+          </div>
+
+          <!-- Métricas rápidas -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-line max-w-lg">
+            <div>
+              <p class="text-2xl font-bold text-fg font-mono">10+</p>
+              <p class="text-xs text-fg-muted">Sitios en Producción</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-success font-mono">SQL + IA</p>
+              <p class="text-xs text-fg-muted">Datos y Asistentes</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-attention font-mono">100%</p>
+              <p class="text-xs text-fg-muted">Desarrollo a Medida</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal interactiva -->
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl overflow-hidden glass border border-line shadow-2xl">
+            <div class="bg-canvas-subtle px-4 py-3 flex items-center justify-between border-b border-line">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-danger"></span>
+                <span class="w-3 h-3 rounded-full bg-attention"></span>
+                <span class="w-3 h-3 rounded-full bg-success"></span>
+              </div>
+              <span class="text-xs font-mono text-fg-muted">dilan@llano-dev:~</span>
+            </div>
+
+            <div id="terminal-output" class="p-4 h-72 overflow-y-auto font-mono text-xs sm:text-sm space-y-2 text-fg-soft"></div>
+
+            <form id="terminal-form" class="border-t border-line bg-canvas-inset px-4 py-2.5 flex items-center gap-2">
+              <span class="text-success font-mono text-sm">&gt;</span>
+              <input id="terminal-input" type="text" aria-label="Comando de terminal" placeholder="Escribe 'help' y presiona Enter..." autocomplete="off" class="w-full bg-transparent text-sm font-mono text-fg focus:outline-none placeholder:text-fg-subtle">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Análisis del perfil profesional -->
+    <section id="perfil" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-4">
+            <span class="text-xs font-mono uppercase tracking-widest text-accent">Tecnología orientada a resultados</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-fg mt-3 leading-tight">
+              Convierto ideas y necesidades en<br>
+              <span class="text-accent">soluciones digitales</span>
+            </h2>
+            <p class="text-fg-muted mt-4 leading-relaxed">
+              Tecnología, datos y automatización al servicio de los resultados.
+            </p>
+            <p class="text-fg-muted mt-3 leading-relaxed text-sm">
+              Combino conocimientos en desarrollo web, análisis de datos, automatización de procesos y herramientas digitales para diseñar soluciones que optimizan tareas, mejoran procesos y facilitan la toma de decisiones.
+            </p>
+          </div>
+
+          <div class="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+            <article class="glass rounded-xl p-5 border-l-2 border-l-accent">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-accent-emphasis/15 text-accent flex items-center justify-center font-mono font-bold">&lt;/&gt;</div>
+                <h3 class="text-base font-bold text-fg">Desarrollo web</h3>
+              </div>
+              <p class="text-sm text-fg-muted leading-relaxed">Creo sitios web y aplicaciones funcionales, modernas y adaptables a diferentes dispositivos.</p>
+              <p class="text-xs text-accent mt-3 font-mono leading-relaxed">HTML · CSS · JavaScript · PHP · MySQL · WordPress · Joomla · WooCommerce</p>
+            </article>
+
+            <article class="glass rounded-xl p-5 border-l-2 border-l-success">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-success-emphasis/15 text-success flex items-center justify-center font-mono font-bold">DB</div>
+                <h3 class="text-base font-bold text-fg">Datos y análisis</h3>
+              </div>
+              <p class="text-sm text-fg-muted leading-relaxed">Transformo datos en información útil para identificar oportunidades, medir resultados y tomar mejores decisiones.</p>
+              <p class="text-xs text-success mt-3 font-mono leading-relaxed">Excel avanzado · SQL · Python · Power BI · Dashboards · Indicadores KPI · Informes de gestión</p>
+            </article>
+
+            <article class="glass rounded-xl p-5 border-l-2 border-l-attention">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-attention/15 text-attention flex items-center justify-center font-mono font-bold">⚡</div>
+                <h3 class="text-base font-bold text-fg">Automatización de procesos</h3>
+              </div>
+              <p class="text-sm text-fg-muted leading-relaxed">Diseño flujos de trabajo que reducen tareas manuales, conectan herramientas y mejoran la eficiencia operativa.</p>
+              <p class="text-xs text-attention mt-3 font-mono leading-relaxed">n8n · Automatización de tareas · Integración de aplicaciones · Gestión de procesos · Conexión de bases de datos</p>
+            </article>
+
+            <article class="glass rounded-xl p-5 border-l-2 border-l-done">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-done/15 text-done flex items-center justify-center font-mono font-bold">SHOP</div>
+                <h3 class="text-base font-bold text-fg">Soluciones digitales y comercio electrónico</h3>
+              </div>
+              <p class="text-sm text-fg-muted leading-relaxed">Desarrollo e implemento herramientas digitales para negocios que buscan mejorar su presencia, organización y operación comercial.</p>
+              <p class="text-xs text-done mt-3 font-mono leading-relaxed">Tiendas online · Gestión de productos · Inventarios · Procesos de venta · Plataformas digitales</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="mt-8 rounded-xl border border-line bg-canvas-subtle p-6 sm:p-7">
+          <h3 class="text-xl font-bold text-fg">Una visión integral de la tecnología</h3>
+          <p class="text-fg-muted text-sm sm:text-base leading-relaxed mt-3">
+            Mi experiencia también abarca soporte técnico, redes, servicio al cliente, gestión administrativa, manejo de inventarios y operación empresarial.
+          </p>
+          <p class="mt-4 text-fg font-semibold text-sm sm:text-base">
+            <span class="text-accent">Mi enfoque:</span> comprender cada necesidad, analizar el problema y convertirlo en una solución tecnológica práctica, organizada y orientada a resultados.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de soluciones a la medida y demo de chat con IA -->
+    <section id="servicios" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl mb-12">
+          <span class="text-xs font-mono uppercase tracking-widest text-accent">Lo que construyo</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-fg mt-2">Soluciones digitales a la medida</h2>
+          <p class="text-fg-muted mt-3">Me adapto a la necesidad real de cada negocio: desde presencia web rápida hasta flujos automáticos, asistentes con IA y software interno.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass rounded-2xl p-6 hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-xl bg-success-emphasis/15 text-success flex items-center justify-center font-mono font-bold text-lg mb-4">IA</div>
+            <h3 class="text-lg font-bold text-fg">Chats Virtuales con IA</h3>
+            <p class="text-sm text-fg-muted mt-2 leading-relaxed">
+              Integración de asistentes virtuales inteligentes en sitios web para responder consultas de clientes con contexto y guías rápidas.
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-xl bg-accent-emphasis/15 text-accent flex items-center justify-center font-mono font-bold text-lg mb-4">⚡</div>
+            <h3 class="text-lg font-bold text-fg">Automatización de Procesos</h3>
+            <p class="text-sm text-fg-muted mt-2 leading-relaxed">
+              Elimino tareas repetitivas conectando formularios, registros operativos, validaciones y reportes para ahorrar horas de trabajo manual.
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-xl bg-attention/15 text-attention flex items-center justify-center font-mono font-bold text-lg mb-4">&lt;/&gt;</div>
+            <h3 class="text-lg font-bold text-fg">Landing Pages &amp; Web</h3>
+            <p class="text-sm text-fg-muted mt-2 leading-relaxed">
+              Páginas web rápidas, modernas y adaptables a celular diseñadas para presentar marcas, servicios, catálogos y captar clientes.
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-xl bg-done/15 text-done flex items-center justify-center font-mono font-bold text-lg mb-4">SQL</div>
+            <h3 class="text-lg font-bold text-fg">Bases de Datos &amp; Medida</h3>
+            <p class="text-sm text-fg-muted mt-2 leading-relaxed">
+              Modelado, consultas optimizadas en SQL y desarrollo de herramientas internas, menús digitales y plataformas personalizadas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Demo interactiva de chat virtual con IA -->
+        <div class="mt-12 glass rounded-2xl p-6 sm:p-8 border border-line grid lg:grid-cols-12 gap-8 items-stretch">
+          <div class="lg:col-span-5 space-y-3 flex flex-col justify-center">
+            <span class="inline-block px-3 py-1 rounded-full bg-accent-emphasis/15 text-accent font-mono text-xs">Caso Real · Asistente Virtual IA</span>
+            <h3 class="text-2xl font-bold text-fg">Prueba cómo integro un Chat Virtual con IA</h3>
+            <p class="text-sm text-fg-muted leading-relaxed">
+              Puedo incorporar un chat virtual inteligente en tu web o sistema para atender preguntas frecuentes, orientar usuarios y dirigir solicitudes.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs px-3 py-1.5 rounded-lg bg-btn text-accent border border-line">
+                ¿Qué sistemas desarrollas?
+              </span>
+              <span class="text-xs px-3 py-1.5 rounded-lg bg-btn text-accent border border-line">
+                ¿Haces menús para restaurantes?
+              </span>
+              <span class="text-xs px-3 py-1.5 rounded-lg bg-btn text-accent border border-line">
+                ¿Cómo funcionan tus automatizaciones?
+              </span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <iframe
+              src="chat.html"
+              title="Chat virtual de Dilan Rojas"
+              loading="lazy"
+              class="block w-full h-[430px] rounded-2xl border border-line bg-canvas-subtle shadow-xl"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nueva sección: Nuestro proceso, tu tranquilidad -->
+    <section id="proceso" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="glass rounded-3xl p-6 sm:p-10 border border-line">
+          <div class="flex items-center gap-3 mb-10">
+            <span class="w-6 h-0.5 rounded-full bg-gradient-to-r from-accent to-done"></span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-fg">Nuestro proceso, tu tranquilidad</h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4 items-start">
+            <!-- 01 -->
+            <div class="relative flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-full bg-done/10 border border-done/40 flex items-center justify-center text-done shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"/></svg>
+                </div>
+                <div class="hidden lg:flex items-center flex-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-done"></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-done/60 to-accent/60"></span>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-accent text-sm">01</span>
+              <h3 class="text-base font-bold text-fg mt-0.5">Entendemos</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+                Escuchamos tu idea y entendemos tus objetivos.
+              </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="relative flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-accent shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                </div>
+                <div class="hidden lg:flex items-center flex-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-accent/60 to-done/60"></span>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-accent text-sm">02</span>
+              <h3 class="text-base font-bold text-fg mt-0.5">Diseñamos</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+                Prototipamos experiencias centradas en el usuario.
+              </p>
+            </div>
+
+            <!-- 03 -->
+            <div class="relative flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-full bg-done/10 border border-done/40 flex items-center justify-center text-done shrink-0">
+                  <span class="font-mono font-bold text-xs">&lt;/&gt;</span>
+                </div>
+                <div class="hidden lg:flex items-center flex-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-done"></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-done/60 to-accent/60"></span>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-accent text-sm">03</span>
+              <h3 class="text-base font-bold text-fg mt-0.5">Desarrollamos</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+                Construimos soluciones robustas y escalables.
+              </p>
+            </div>
+
+            <!-- 04 -->
+            <div class="relative flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-accent shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div class="hidden lg:flex items-center flex-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-accent/60 to-done/60"></span>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-accent text-sm">04</span>
+              <h3 class="text-base font-bold text-fg mt-0.5">Implementamos</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+                Llevamos tu solución al mundo con éxito.
+              </p>
+            </div>
+
+            <!-- 05 -->
+            <div class="relative flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-full bg-done/10 border border-done/40 flex items-center justify-center text-accent shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-accent text-sm">05</span>
+              <h3 class="text-base font-bold text-fg mt-0.5">Evolucionamos</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+                Te acompañamos y mejoramos continuamente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nueva sección: Transformamos ideas en soluciones digitales + Pilares -->
+    <section id="pilares" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-10 space-y-3">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-fg leading-[1.08]">
+            Transformamos ideas en<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-done to-[#c084fc]">soluciones digitales</span>
+          </h2>
+          <p class="text-fg-muted text-sm sm:text-base max-w-2xl leading-relaxed">
+            Desarrollamos software práctico, seguro y escalable que impulsa el crecimiento y la eficiencia de negocios, comercios y equipos operativos.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Innovación -->
+          <div class="glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 border-l-2 border-l-done hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-full bg-done/10 border border-done/30 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-bold text-fg">Innovación</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-0.5">Tecnología aplicada a problemas reales de un negocio.</p>
+            </div>
+          </div>
+
+          <!-- Seguridad -->
+          <div class="glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 border-l-2 border-l-accent hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center text-done shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-bold text-fg">Seguridad</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-0.5">Software estructurado, protegido y confiable desde el primer commit.</p>
+            </div>
+          </div>
+
+          <!-- Escalabilidad -->
+          <div class="glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 border-l-2 border-l-done hover:border-fg-subtle transition">
+            <div class="w-11 h-11 rounded-full bg-done/10 border border-done/30 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-bold text-fg">Escalabilidad</h3>
+              <p class="text-xs sm:text-sm text-fg-muted mt-0.5">Soluciones que crecen al ritmo de tu operación, sin frenarte.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nueva sección: Dominios, Hosting y Correo Profesional -->
+    <section id="infraestructura" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl mb-10">
+          <span class="text-xs font-mono uppercase tracking-widest text-accent">Infraestructura &amp; Presencia</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-fg mt-2">Dominios y Correo Profesional</h2>
+          <p class="text-fg-muted mt-2">Te ayudo a configurar tu dominio, organizar tu alojamiento y habilitar correos corporativos para proyectar confianza.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Tarjeta 1: Dominios -->
+          <div class="glass rounded-2xl p-6 sm:p-7 flex flex-col justify-between border border-line hover:border-accent/60 transition">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-accent-emphasis/15 text-accent font-mono text-xs">DNS · SSL · Alojamiento</span>
+                <span class="text-xs font-mono text-fg-subtle">01</span>
+              </div>
+              <h3 class="text-2xl font-extrabold tracking-tight text-fg leading-snug">
+                ALMACENAMIENTO Y ADMINISTRACIÓN DE <span class="text-accent">DOMINIOS</span>
+              </h3>
+              <p class="text-sm text-fg-muted mt-3 leading-relaxed">
+                Configuración de registros DNS, certificados de seguridad, vinculación de hosting y respaldo ordenado de tus activos web.
+              </p>
+
+              <div class="mt-5 space-y-2.5">
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-canvas-subtle border border-line">
+                  <span class="text-accent font-mono text-sm">☁🛡</span>
+                  <span class="text-xs sm:text-sm font-bold text-fg">¿TU INFORMACIÓN ESTÁ SEGURA?</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-canvas-subtle border border-line">
+                  <span class="text-done font-mono text-sm">🌐⚙</span>
+                  <span class="text-xs sm:text-sm font-bold text-accent">¿TU DOMINIO ESTÁ BIEN ADMINISTRADO?</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://wa.me/573156218047?text=Hola%20Dilan,%20necesito%20ayuda%20con%20almacenamiento%20y%20administraci%C3%B3n%20de%20dominios" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Revisar mi dominio →
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">Soporte técnico</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Correo Profesional -->
+          <div class="glass rounded-2xl p-6 sm:p-7 flex flex-col justify-between border border-line hover:border-accent/60 transition">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-success-emphasis/15 text-success font-mono text-xs">Identidad Corporativa</span>
+                <span class="text-xs font-mono text-fg-subtle">02</span>
+              </div>
+              <h3 class="text-2xl font-extrabold tracking-tight text-fg leading-snug">
+                CREA UNA CUENTA DE<br>
+                <span class="text-fg">CORREO</span> <span class="text-accent">PROFESIONAL</span>
+              </h3>
+              <p class="text-sm text-fg-muted mt-3 leading-relaxed">
+                Cuentas tipo <code class="font-mono text-xs px-1.5 py-0.5 rounded bg-btn text-accent-light">contacto@tunegocio.com</code> con configuración limpia de SPF, DKIM y DMARC para mayor entregabilidad y credibilidad ante clientes.
+              </p>
+
+              <div class="mt-5 p-4 rounded-xl bg-canvas-inset border border-line font-mono text-xs space-y-2">
+                <div class="flex items-center justify-between text-fg-muted">
+                  <span>Para: cliente@empresa.com</span>
+                  <span class="text-success">✓ Verificado</span>
+                </div>
+                <div class="text-fg">Asunto: Propuesta y cotización — Tu Marca</div>
+                <div class="text-fg-subtle">Enviado desde correo corporativo con dominio propio.</div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://wa.me/573156218047?text=Hola%20Dilan,%20quiero%20configurar%20cuentas%20de%20correo%20profesional" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Configurar correo →
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">Tu dominio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos en producción y proyectos locales / a la medida -->
+    <section id="proyectos" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-accent">Portafolio Real</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-fg mt-2">Proyectos en Producción y a la Medida</h2>
+            <p class="text-fg-muted mt-2 max-w-3xl">Además de mis sitios publicados en internet, cuento con desarrollos empresariales e institucionales que realizaron análisis, gestión administrativa y automatización de procesos.</p>
+            <p class="text-fg-subtle mt-2 max-w-3xl text-xs">Las experiencias privadas se presentan de forma general. Las imágenes, capturas y detalles públicos requieren confirmación de autorización.</p>
+          </div>
+          <div class="flex flex-wrap gap-2" id="filter-buttons">
+            <button type="button" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition bg-success-emphasis text-white">Todos</button>
+            <button type="button" data-filter="web" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold hover:text-fg transition glass text-fg-soft">En Línea</button>
+            <button type="button" data-filter="custom" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold hover:text-fg transition glass text-fg-soft">A la Medida / Local</button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 1. MEGARED -->
+          <article data-category="web" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-success-emphasis/15 text-success font-mono text-xs">En Línea · ISP &amp; E-Commerce</span>
+                <span class="text-xs font-mono text-fg-subtle">01</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">MEGARED Telecomunicaciones</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Portal corporativo y tienda tecnológica para proveedor de internet por fibra óptica, aire y TV en Granada y San José. También participé en análisis de datos y la creación de herramientas web con métricas diarias, semanales y mensuales.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Web Corporativa</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Catálogo</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Dashboard &amp; Datos</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://tiendasmegared.com/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Visitar sitio ↗
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">tiendasmegared.com</span>
+            </div>
+          </article>
+
+          <!-- 2. OPTICA / OptoKids -->
+          <article data-category="web" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-accent-emphasis/15 text-accent font-mono text-xs">En Línea · Salud &amp; Chat IA</span>
+                <span class="text-xs font-mono text-fg-subtle">02</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">OptoKids | Optometría Pediátrica</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Plataforma interactiva especializada en salud visual infantil. Incorpora diagrama anatómico del ojo tocable, test visual interactivo, autoevaluación de señales para padres y un <strong class="text-fg">Asistente Virtual con IA</strong>.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Chat Virtual IA</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">SVG Interactivo</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Frontend Custom</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://tiendasmegared.com/Dilan/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Visitar sitio ↗
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">/Dilan/</span>
+            </div>
+          </article>
+
+          <!-- 3. WORKTIME -->
+          <article data-category="web" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-attention/15 text-attention font-mono text-xs">En Línea · Productividad</span>
+                <span class="text-xs font-mono text-fg-subtle">03</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">MiWorktime</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Aplicación web enfocada en el control, seguimiento y gestión de tiempos operativos y jornadas laborales, optimizada para acceso ágil desde navegador web.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Gestión de Tiempo</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Web App</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">GitHub Pages</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://nickrowal04.github.io/MiWorktime/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Visitar sitio ↗
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">github.io</span>
+            </div>
+          </article>
+
+          <!-- 4. Dashboard de análisis de datos -->
+          <article data-category="custom" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-success-emphasis/15 text-success font-mono text-xs">Proyecto Profesional · Megared</span>
+                <span class="text-xs font-mono text-fg-subtle">04</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">Dashboard de análisis de datos</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Aplicativo web para analizar y visualizar datos operativos mediante métricas diarias, semanales y mensuales. Incluyó gestión de información en MySQL y automatización de procesos.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">MySQL</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Dashboards</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Automatización</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <a href="https://wa.me/573156218047?text=Hola%20Dilan,%20quiero%20conocer%20un%20dashboard%20de%20datos" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:text-accent-light hover:underline transition">
+                Solicitar información →
+              </a>
+              <span class="text-xs font-mono text-fg-subtle">Proyecto privado</span>
+            </div>
+          </article>
+
+          <!-- 5. Sistema de torneos -->
+          <article data-category="custom" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-attention/15 text-attention font-mono text-xs">Aplicación Institucional · Gobernación</span>
+                <span class="text-xs font-mono text-fg-subtle">05</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">Sistema de gestión de torneos</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Plataforma web para gestionar inscripciones, puntuaciones y datos de torneos. La interfaz fue diseñada para facilitar el seguimiento administrativo desde dispositivos móviles y escritorio.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Inscripciones</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Puntuaciones</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Responsive</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <span class="text-sm font-semibold text-fg-subtle">Gobernación del Meta</span>
+              <span class="text-xs font-mono text-fg-subtle">Proyecto privado</span>
+            </div>
+          </article>
+
+          <!-- 6. Clínica Meta -->
+          <article data-category="custom" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-accent-emphasis/15 text-accent font-mono text-xs">Sitio Web · Salud</span>
+                <span class="text-xs font-mono text-fg-subtle">06</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">Sitio web — Clínica Meta</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Desarrollo web enfocado en presentar el talento humano, organizar contenidos y facilitar la interacción visual. El proyecto priorizó una estructura clara y adaptable.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Presentación</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Diseño visual</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Contenido</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <span class="text-sm font-semibold text-fg-subtle">Clínica Meta</span>
+              <span class="text-xs font-mono text-fg-subtle">Proyecto privado</span>
+            </div>
+          </article>
+
+          <!-- 7. FUNSEDER -->
+          <article data-category="custom" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-done/15 text-done font-mono text-xs">Plataforma Digital · FUNSEDER</span>
+                <span class="text-xs font-mono text-fg-subtle">07</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">Registro y seguimiento de beneficiarios</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Plataforma web orientada al registro de beneficiarios y el seguimiento de procesos comunitarios, con una estructura administrativa para organizar información y avances.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Beneficiarios</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Seguimiento</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Gestión comunitaria</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <span class="text-sm font-semibold text-fg-subtle">FUNSEDER</span>
+              <span class="text-xs font-mono text-fg-subtle">Proyecto privado</span>
+            </div>
+          </article>
+
+          <!-- 8. Sistema administrativo -->
+          <article data-category="custom" class="project-card glass rounded-2xl p-6 flex flex-col justify-between hover:border-fg-subtle transition" style="display: flex;">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-success-emphasis/15 text-success font-mono text-xs">Sistema Administrativo · Privado</span>
+                <span class="text-xs font-mono text-fg-subtle">08</span>
+              </div>
+              <h3 class="text-xl font-bold text-fg">Sistema administrativo y contable</h3>
+              <p class="text-sm text-fg-muted mt-2.5 leading-relaxed">
+                Aplicación interna para gestionar clientes, facturación, reportes financieros, automatización y soporte operativo en procesos administrativos.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-4">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Clientes</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Facturación</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-btn text-fg-soft">Reportes financieros</span>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-line flex items-center justify-between">
+              <span class="text-sm font-semibold text-fg-subtle">Aplicación interna</span>
+              <span class="text-xs font-mono text-fg-subtle">Proyecto privado</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Laboratorio SQL interactivo -->
+    <section id="sql-lab" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl mb-10">
+          <span class="text-xs font-mono uppercase tracking-widest text-accent">Bases de Datos</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-fg mt-2">Manejo de SQL &amp; Automatización de Datos</h2>
+          <p class="text-fg-muted mt-2">Prueba ejemplos reales de cómo estructuro, filtro y automatizo registros en bases de datos relacionales.</p>
+        </div>
+
+        <div class="glass rounded-2xl overflow-hidden border border-line">
+          <div class="bg-canvas-subtle px-4 py-3 border-b border-line flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <button type="button" data-sql-idx="0" class="sql-tab px-3 py-1.5 rounded-lg text-xs font-mono bg-success-emphasis text-white font-bold">1. Consulta Operativa</button>
+              <button type="button" data-sql-idx="1" class="sql-tab px-3 py-1.5 rounded-lg text-xs font-mono bg-btn text-fg-soft hover:text-fg">2. Inserción Segura</button>
+              <button type="button" data-sql-idx="2" class="sql-tab px-3 py-1.5 rounded-lg text-xs font-mono bg-btn text-fg-soft hover:text-fg">3. Reporte por Sector</button>
+            </div>
+            <button id="run-sql-btn" type="button" class="px-4 py-1.5 rounded-lg bg-accent-emphasis hover:bg-accent-hover text-white font-mono font-bold text-xs transition">
+              ▶ Ejecutar Query
+            </button>
+          </div>
+
+          <div class="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-line">
+            <div class="p-5 bg-canvas-inset">
+              <p class="text-xs font-mono text-fg-subtle mb-2">-- Editor SQL</p>
+              <pre id="sql-code" class="font-mono text-xs sm:text-sm text-accent-light overflow-x-auto leading-relaxed">SELECT p.nombre, p.categoria, p.estado
+FROM proyectos_dilan p
+WHERE p.ubicacion = 'Granada, Meta'
+ORDER BY p.id ASC;</pre>
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-mono text-fg-subtle mb-2">-- Resultado de ejecución</p>
+              <div id="sql-result" class="overflow-x-auto text-xs font-mono"><table class="w-full text-left border-collapse"><thead><tr class="border-b border-line text-accent"><th class="py-2 pr-4">nombre</th><th class="py-2 pr-4">categoria</th><th class="py-2 pr-4">estado</th></tr></thead><tbody class="divide-y divide-line-muted text-fg-soft"><tr><td class="py-2 pr-4">MEGARED Web &amp; Tienda</td><td class="py-2 pr-4">Telecomunicaciones</td><td class="py-2 pr-4">En Línea</td></tr><tr><td class="py-2 pr-4">OptoKids + Chat IA</td><td class="py-2 pr-4">Optometría Pediátrica</td><td class="py-2 pr-4">En Línea</td></tr><tr><td class="py-2 pr-4">MiWorktime</td><td class="py-2 pr-4">Control de Tiempo</td><td class="py-2 pr-4">En Línea</td></tr><tr><td class="py-2 pr-4">Menú Digital QR</td><td class="py-2 pr-4">Restaurantes</td><td class="py-2 pr-4">Local / Medida</td></tr></tbody></table></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de contacto directo -->
+    <section id="contacto" class="py-20 px-4 sm:px-6 border-t border-line-muted">
+      <div class="max-w-5xl mx-auto glass rounded-3xl p-6 sm:p-12 border border-line">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-4">
+            <span class="text-xs font-mono uppercase tracking-widest text-accent">Contacto Directo</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-fg">¿Necesitas una web, un chat con IA o automatizar un proceso?</h2>
+            <p class="text-fg-muted text-sm sm:text-base leading-relaxed">
+              Soy <strong class="text-fg">Dilan Rojas</strong>, desarrollador llanero listo para ayudarte a construir soluciones prácticas, rápidas y a la medida de tu negocio.
+            </p>
+
+            <div class="space-y-3 pt-2 text-sm">
+              <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-canvas-subtle border border-line">
+                <div class="min-w-0">
+                  <p class="text-xs text-fg-muted">Correo electrónico</p>
+                  <p class="font-mono text-fg truncate">dilanicolas040@gmail.com</p>
+                </div>
+                <button id="copy-email-btn" type="button" class="px-3 py-1.5 rounded-lg bg-btn hover:bg-success-emphasis hover:text-white text-xs font-semibold transition shrink-0">
+                  Copiar
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-canvas-subtle border border-line">
+                <div>
+                  <p class="text-xs text-fg-muted">Teléfono / WhatsApp</p>
+                  <p class="font-mono text-fg">+57 315 621 8047</p>
+                </div>
+                <a href="https://wa.me/573156218047" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-success-emphasis hover:bg-success-hover text-white text-xs font-bold transition shrink-0">
+                  Escribir
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <form id="contact-form" class="space-y-4 bg-canvas-subtle p-6 rounded-2xl border border-line">
+            <div>
+              <label for="c-name" class="block text-xs font-mono text-fg-muted mb-1">Tu nombre o negocio</label>
+              <input id="c-name" type="text" required="" placeholder="Ej. Restaurante El Llano" class="w-full px-3.5 py-2.5 rounded-xl bg-canvas border border-line text-sm text-fg focus:outline-none focus:border-accent-emphasis">
+            </div>
+            <div>
+              <label for="c-service" class="block text-xs font-mono text-fg-muted mb-1">¿Qué necesitas desarrollar?</label>
+              <select id="c-service" class="w-full px-3.5 py-2.5 rounded-xl bg-canvas border border-line text-sm text-fg focus:outline-none focus:border-accent-emphasis">
+                <option>Landing Page / Sitio Web</option>
+                <option>Chat Virtual con IA para consultas</option>
+                <option>Automatización de procesos</option>
+                <option>Menú Digital para Restaurante</option>
+                <option>Dominios / Correo Profesional</option>
+                <option>Base de Datos SQL / Sistema a la medida</option>
+              </select>
+            </div>
+            <div>
+              <label for="c-msg" class="block text-xs font-mono text-fg-muted mb-1">Cuéntame brevemente tu idea</label>
+              <textarea id="c-msg" rows="3" required="" placeholder="Describe lo que buscas..." class="w-full px-3.5 py-2.5 rounded-xl bg-canvas border border-line text-sm text-fg focus:outline-none focus:border-accent-emphasis"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-success-emphasis hover:bg-success-hover text-white font-bold text-sm transition">
+              Enviar consulta por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="py-8 px-4 sm:px-6 border-t border-line text-center text-xs text-fg-subtle font-mono">
+    <p>© <span id="year-span">2026</span> Dilan Rojas · Desarrollador de Software Llanero · Granada, Meta, Colombia.</p>
+  </footer>
+
+  <!-- Notificación toast -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-xl bg-success-emphasis text-white font-semibold text-xs shadow-xl">
+    ¡Copiado al portapapeles!
+  </div>
+
+  <script>
+    // Actualiza el año dinámicamente en el footer
+    document.getElementById('year-span').textContent = new Date().getFullYear();
+
+    // --- 1. Terminal interactiva ---
+    const termForm = document.getElementById('terminal-form');
+    const termInput = document.getElementById('terminal-input');
+    const termOut = document.getElementById('terminal-output');
+
+    const commands = {
+      help: 'Comandos disponibles: about, proceso, proyectos, ia, sql, dominios, contacto, clear',
+      about: 'Dilan Rojas | Desarrollador de Software llanero (Granada, Meta). Creo software a la medida, automatizaciones, webs y chats con IA.',
+      proceso: '01 Entendemos -> 02 Diseñamos -> 03 Desarrollamos -> 04 Implementamos -> 05 Evolucionamos.',
+      proyectos: 'MEGARED, OptoKids, MiWorktime, dashboards de datos, gestión de torneos, sitio web clínico, FUNSEDER y sistemas administrativos privados.',
+      ia: 'Integro asistentes virtuales con IA para responder dudas de clientes en sitios web (como el Asistente OptoKids).',
+      sql: 'Diseño bases de datos relacionales, automatización de inserciones (INSERT IGNORE), reportes y optimización de consultas SQL.',
+      dominios: 'Configuración de dominios, DNS, seguridad y cuentas de correo profesional para tu marca.',
+      contacto: 'Correo: dilanicolas040@gmail.com | WhatsApp: +57 315 621 8047'
+    };
+
+    termForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cmd = termInput.value.trim().toLowerCase();
+      if (!cmd) return;
+
+      if (cmd === 'clear') {
+        termOut.innerHTML = '';
+        termInput.value = '';
+        return;
+      }
+
+      const pCmd = document.createElement('p');
+      pCmd.className = 'text-success';
+      pCmd.textContent = '$ ' + cmd;
+      termOut.appendChild(pCmd);
+
+      const pRes = document.createElement('p');
+      pRes.textContent = Object.prototype.hasOwnProperty.call(commands, cmd)
+        ? commands[cmd]
+        : `Comando "${cmd}" no reconocido. Prueba con: help`;
+      termOut.appendChild(pRes);
+
+      termOut.scrollTop = termOut.scrollHeight;
+      termInput.value = '';
+    });
+
+    // --- 3. Filtro de proyectos ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach((clickedBtn) => {
+      clickedBtn.addEventListener('click', () => {
+        const cat = clickedBtn.dataset.filter;
+
+        filterButtons.forEach((btn) => {
+          btn.classList.remove('bg-success-emphasis', 'text-white');
+          btn.classList.add('glass', 'text-fg-soft');
+        });
+
+        clickedBtn.classList.remove('glass', 'text-fg-soft');
+        clickedBtn.classList.add('bg-success-emphasis', 'text-white');
+
+        projectCards.forEach((card) => {
+          card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // --- 4. Laboratorio SQL interactivo ---
+    const sqlSamples = [
+      {
+        code: `SELECT p.nombre, p.categoria, p.estado
+FROM proyectos_dilan p
+WHERE p.ubicacion = 'Granada, Meta'
+ORDER BY p.id ASC;`,
+        headers: ['nombre', 'categoria', 'estado'],
+        rows: [
+          ['MEGARED Web & Tienda', 'Telecomunicaciones', 'En Línea'],
+          ['OptoKids + Chat IA', 'Optometría Pediátrica', 'En Línea'],
+          ['MiWorktime', 'Control de Tiempo', 'En Línea'],
+          ['Menú Digital QR', 'Restaurantes', 'Local / Medida']
+        ]
+      },
+      {
+        code: `INSERT IGNORE INTO automatizaciones_clientes
+  (cliente, flujo, ahorro_horas_sem)
+VALUES
+  ('ISP Regional', 'Sincronización Tickets SQL', 14),
+  ('Consultorio OptoKids', 'Asistente IA Consultas', 10);`,
+        headers: ['status', 'filas_afectadas', 'mensaje'],
+        rows: [
+          ['OK', '2', 'Registros insertados sin duplicados correctamente']
+        ]
+      },
+      {
+        code: `SELECT servicio, COUNT(*) AS soluciones
+FROM portafolio_servicios
+GROUP BY servicio
+ORDER BY soluciones DESC;`,
+        headers: ['servicio', 'soluciones'],
+        rows: [
+          ['Desarrollo Web & Landing Pages', '5'],
+          ['Automatización & SQL', '4'],
+          ['Chats Virtuales con IA', '2']
+        ]
+      }
+    ];
+
+    let currentSql = 0;
+    const sqlTabs = document.querySelectorAll('.sql-tab');
+
+    function runSql() {
+      const sample = sqlSamples[currentSql];
+      let html = '<table class="w-full text-left border-collapse"><thead><tr class="border-b border-line text-accent">';
+      sample.headers.forEach((h) => {
+        html += `<th class="py-2 pr-4">${h}</th>`;
+      });
+      html += '</tr></thead><tbody class="divide-y divide-line-muted text-fg-soft">';
+      sample.rows.forEach((r) => {
+        html += '<tr>';
+        r.forEach((c) => {
+          html += `<td class="py-2 pr-4">${c}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      document.getElementById('sql-result').innerHTML = html;
+    }
+
+    function loadSql(idx) {
+      currentSql = idx;
+      document.getElementById('sql-code').textContent = sqlSamples[idx].code;
+      sqlTabs.forEach((t, i) => {
+        t.className = i === idx
+          ? 'sql-tab px-3 py-1.5 rounded-lg text-xs font-mono bg-success-emphasis text-white font-bold'
+          : 'sql-tab px-3 py-1.5 rounded-lg text-xs font-mono bg-btn text-fg-soft hover:text-fg';
+      });
+      runSql();
+    }
+
+    sqlTabs.forEach((tab) => {
+      tab.addEventListener('click', () => loadSql(Number(tab.dataset.sqlIdx)));
+    });
+    document.getElementById('run-sql-btn').addEventListener('click', runSql);
+    loadSql(0);
+
+    // --- 5. Copiar correo, enviar por WhatsApp y descargar HTML ---
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('hidden'), 2200);
+    }
+
+    document.getElementById('copy-email-btn').addEventListener('click', async () => {
+      const email = 'dilanicolas040@gmail.com';
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(email);
+        copied = true;
+      } catch (_) {
+        const helper = document.createElement('textarea');
+        helper.value = email;
+        helper.setAttribute('readonly', '');
+        helper.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+        document.body.appendChild(helper);
+        helper.select();
+        try { copied = document.execCommand('copy'); } catch (_) {}
+        document.body.removeChild(helper);
+      }
+      showToast(copied ? '¡Correo copiado al portapapeles!' : 'No se pudo copiar. Selecciónalo manualmente.');
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('c-name').value.trim();
+      const service = document.getElementById('c-service').value;
+      const msg = document.getElementById('c-msg').value.trim();
+      const text = encodeURIComponent(`Hola Dilan, soy ${name}. Me interesa: ${service}. Detalles: ${msg}`);
+      window.open(`https://wa.me/573156218047?text=${text}`, '_blank', 'noopener,noreferrer');
+    });
+
+  </script>
+
+</body></html>
